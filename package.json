@@ -1,0 +1,25 @@
+{
+  "name": "lokrun-backend",
+  "version": "1.0.0",
+  "description": "Lokrun – A Citizen Civic-Infrastructure Reporting Platform Backend (SNJB KBJ CoE)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node scripts/verify-all.js",
+    "test:frontend": "node scripts/verify-frontend.js",
+    "test:all": "node scripts/verify-all.js && node scripts/verify-frontend.js"
+  },
+  "keywords": [
+    "civic",
+    "reporting",
+    "snjb",
+    "prototype",
+    "infrastructure",
+    "citizen-engagement"
+  ],
+  "author": "SNJB AI&DS Community Engagement",
+  "license": "ISC",
+  "engines": {
+    "node": ">=18"
+  }
+}

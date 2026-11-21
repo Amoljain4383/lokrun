@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Profile – Lokrun</title>
+  <link rel="stylesheet" href="/css/shared.css">
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+
+  <div class="admin-layout">
+    <div id="sidebar-backdrop" class="sidebar-backdrop"></div>
+
+    <!-- Dark Navy Sidebar -->
+    <aside id="admin-sidebar" class="admin-sidebar">
+      <div class="sidebar-brand">
+        <svg style="width: 26px; height: 26px;" viewBox="0 0 24 24" fill="none">
+          <path d="M12 2C8.13 2 5 5.13 5 9C5 14.25 12 22 12 22C12 22 19 14.25 19 9C19 5.13 15.87 2 12 2ZM12 11.5C10.62 11.5 9.5 10.38 9.5 9C9.5 7.62 10.62 6.5 12 6.5C13.38 6.5 14.5 7.62 14.5 9C14.5 10.38 13.38 11.5 12 11.5Z" fill="#E05A47"/>
+        </svg>
+        <span>Lokrun Admin</span>
+      </div>
+
+      <nav class="sidebar-nav" aria-label="Admin Navigation">
+        <a href="/admin/dashboard.html" id="nav-dashboard" class="sidebar-link">
+          <span class="sidebar-link-icon">📊</span> Dashboard
+        </a>
+        <a href="/admin/reports.html" id="nav-reports" class="sidebar-link">
+          <span class="sidebar-link-icon">📋</span> Reports
+        </a>
+        <a href="/admin/profile.html" id="nav-profile" class="sidebar-link">
+          <span class="sidebar-link-icon">👤</span> Admin Profile
+        </a>
+        <a href="/admin/status.html" id="nav-status" class="sidebar-link">
+          <span class="sidebar-link-icon">⚙️</span> Server &amp; Storage
+        </a>
+
+        <div class="sidebar-divider"></div>
+
+        <a href="/" class="sidebar-link">
+          <span class="sidebar-link-icon">←</span> Citizen Website
+        </a>
+      </nav>
+
+      <!-- Bottom User Chip -->
+      <div class="sidebar-user">
+        <div id="user-chip-avatar" class="user-avatar">A</div>
+        <div class="user-info">
+          <div id="user-chip-name" class="user-name">Loading...</div>
+          <div id="user-chip-role" class="user-role-badge">Administrator</div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="admin-main">
+      <header class="admin-topbar">
+        <div class="topbar-left">
+          <button type="button" id="btn-sidebar-toggle" class="btn-sidebar-toggle" aria-label="Toggle Navigation">
+            ☰
+          </button>
+          <h1 class="topbar-title">Administrator Profile</h1>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <button type="button" id="btn-sign-out" class="btn btn-outline btn-sm">
+            Sign out
+          </button>
+        </div>
+      </header>
+
+      <div class="admin-body">
+        <div style="max-width: 680px; margin: 0 auto;">
+          <div class="table-card" style="padding: 2.5rem 2rem;">
+            <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem; border-bottom: 1px solid var(--color-border-subtle); padding-bottom: 2rem;">
+              <div id="profile-avatar" style="width: 72px; height: 72px; border-radius: 50%; background: var(--color-primary); color: #FFFFFF; font-size: 2rem; font-weight: 800; display: flex; align-items: center; justify-content: center;">
+                A
+              </div>
+              <div>
+                <h2 id="profile-name" style="font-size: 1.6rem; font-weight: 800; color: var(--color-navy); margin-bottom: 0.25rem;">
+                  Loading...
+                </h2>
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                  <span id="profile-role" class="badge" style="background: var(--color-primary-tint); color: var(--color-primary-dark); font-size: 0.85rem;">
+                    Administrator
+                  </span>
+                  <span style="font-size: 0.8rem; color: var(--color-text-muted);">
+                    &bull; SNJB Campus Engineer
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Profile Attributes Grid -->
+            <div style="display: grid; grid-template-columns: 1fr; gap: 1.25rem;">
+              <div style="padding: 1rem; background: var(--color-bg-sage); border-radius: var(--radius-md);">
+                <div style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--color-primary);">
+                  Administrative Login ID
+                </div>
+                <div id="profile-id" style="font-family: var(--font-mono); font-size: 1.1rem; font-weight: 700; color: var(--color-navy); margin-top: 0.2rem;">
+                  —
+                </div>
+              </div>
+
+              <div style="padding: 1rem; background: var(--color-bg-sage); border-radius: var(--radius-md);">
+                <div style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--color-primary);">
+                  Assigned Authority Role
+                </div>
+                <div id="profile-role-full" style="font-size: 1.05rem; font-weight: 600; color: var(--color-navy); margin-top: 0.2rem;">
+                  Administrator (Local Prototype Access)
+                </div>
+              </div>
+
+              <div style="padding: 1rem; background: var(--color-bg-sage); border-radius: var(--radius-md);">
+                <div style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--color-primary);">
+                  Account Registration Date
+                </div>
+                <div id="profile-created" style="font-size: 1.05rem; font-weight: 600; color: var(--color-navy); margin-top: 0.2rem;">
+                  —
+                </div>
+              </div>
+
+              <div style="padding: 1rem; background: var(--color-bg-sage); border-radius: var(--radius-md);">
+                <div style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--color-primary);">
+                  Session Security Status
+                </div>
+                <div style="font-size: 0.95rem; font-weight: 600; color: #059669; margin-top: 0.2rem;">
+                  Active (Cryptographic scrypt hash + HttpOnly session token)
+                </div>
+              </div>
+            </div>
+
+            <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--color-border-subtle); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+              <div style="font-size: 0.8rem; color: var(--color-text-muted);">
+                Institution: SNJB's KBJ College of Engineering, Chandwad
+              </div>
+              <a href="/admin/register.html" id="btn-register-admin" class="btn btn-outline btn-sm">
+                + Register New Admin
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="site-footer">
+        <div class="container footer-content">
+          <div>
+            <div class="brand" style="color: #FFFFFF; font-size: 1rem;">
+              Lokrun Admin Portal
+            </div>
+            <div class="footer-meta">
+              SNJB's KBJ College of Engineering, Chandwad &bull; AI &amp; DS Project Prototype
+            </div>
+          </div>
+          <div class="footer-prototype-disclaimer">
+            Local prototype – not connected to any government department. Prototype for a college project. Please do not submit sensitive personal information.
+          </div>
+        </div>
+      </footer>
+    </main>
+  </div>
+
+  <script src="/js/admin-common.js"></script>
+  <script src="/js/admin-profile.js"></script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login – Lokrun Civic Infrastructure</title>
+  <link rel="stylesheet" href="/css/shared.css">
+  <link rel="stylesheet" href="/css/admin.css">
+  <style>
+    .login-container {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem 1.5rem;
+      background: linear-gradient(180deg, var(--color-navy) 0%, var(--color-navy-dark) 100%);
+    }
+    .login-card {
+      background: var(--color-navy-card);
+      border: 1px solid var(--color-navy-border);
+      border-radius: var(--radius-xl);
+      padding: 2.5rem 2rem;
+      max-width: 440px;
+      width: 100%;
+      box-shadow: var(--shadow-xl);
+      color: #FFFFFF;
+    }
+    .login-hint {
+      background: rgba(94, 234, 212, 0.1);
+      border: 1px solid rgba(94, 234, 212, 0.25);
+      border-radius: var(--radius-md);
+      padding: 0.75rem 1rem;
+      margin-top: 1.5rem;
+      font-size: 0.85rem;
+      color: #5EEAD4;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-container">
+    <div class="login-card">
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <a href="/" class="brand" style="justify-content: center; color: #FFFFFF; font-size: 1.6rem; margin-bottom: 0.5rem;">
+          <svg class="brand-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2C8.13 2 5 5.13 5 9C5 14.25 12 22 12 22C12 22 19 14.25 19 9C19 5.13 15.87 2 12 2ZM12 11.5C10.62 11.5 9.5 10.38 9.5 9C9.5 7.62 10.62 6.5 12 6.5C13.38 6.5 14.5 7.62 14.5 9C14.5 10.38 13.38 11.5 12 11.5Z" fill="#E05A47"/>
+          </svg>
+          Lokrun<span>.</span>
+        </a>
+        <div style="font-size: 0.85rem; color: var(--color-text-inverse-muted); text-transform: uppercase; font-weight: 700; letter-spacing: 0.05em;">
+          Civic Administrator Portal
+        </div>
+      </div>
+
+      <div id="login-alert" class="form-alert form-alert-danger" role="alert"></div>
+
+      <form id="login-form" novalidate>
+        <div class="form-group">
+          <label for="admin-id" class="form-label">
+            Admin ID / Username <span class="required-mark">*</span>
+          </label>
+          <input
+            type="text"
+            id="admin-id"
+            class="form-control"
+            placeholder="e.g. lokrun.admin"
+            required
+            autocomplete="username"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="admin-password" class="form-label">
+            Password <span class="required-mark">*</span>
+          </label>
+          <input
+            type="password"
+            id="admin-password"
+            class="form-control"
+            placeholder="Enter your password"
+            required
+            autocomplete="current-password"
+          >
+        </div>
+
+        <div class="mt-3">
+          <button type="submit" id="btn-login-submit" class="btn btn-primary btn-lg btn-block">
+            Sign In to Dashboard
+          </button>
+        </div>
+      </form>
+
+      <div class="login-hint" id="login-demo-hint">
+        <strong>Default local admin:</strong><br>
+        <code>lokrun.admin</code> / <code>Lokrun@2026</code>
+      </div>
+
+      <div id="register-link-container" style="margin-top: 1.5rem; text-align: center; font-size: 0.875rem;">
+        <span style="color: var(--color-text-inverse-muted);">Need a new administrative account?</span><br>
+        <a href="/admin/register.html" style="color: #5EEAD4; font-weight: 600; text-decoration: underline;">
+          Register as Admin
+        </a>
+      </div>
+
+      <div style="margin-top: 1.25rem; text-align: center;">
+        <a href="/" style="font-size: 0.85rem; color: var(--color-text-inverse-muted);">
+          &larr; Return to citizen website
+        </a>
+      </div>
+    </div>
+
+    <div style="margin-top: 2rem; color: #64748B; font-size: 0.8rem; text-align: center;">
+      Local prototype – not connected to any government department. Prototype for a college project. Please do not submit sensitive personal information.
+    </div>
+  </div>
+
+  <script src="/js/admin-login.js"></script>
+</body>
+</html>

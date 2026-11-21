@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lokrun – Civic Infrastructure Reporting Platform</title>
+  <link rel="stylesheet" href="/css/shared.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="/" class="brand" aria-label="Lokrun Home">
+        <svg class="brand-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2C8.13 2 5 5.13 5 9C5 14.25 12 22 12 22C12 22 19 14.25 19 9C19 5.13 15.87 2 12 2ZM12 11.5C10.62 11.5 9.5 10.38 9.5 9C9.5 7.62 10.62 6.5 12 6.5C13.38 6.5 14.5 7.62 14.5 9C14.5 10.38 13.38 11.5 12 11.5Z" fill="#E05A47"/>
+        </svg>
+        <span class="brand-text">Lokrun<span>.</span></span>
+      </a>
+
+      <nav aria-label="Primary Navigation">
+        <ul class="nav-links">
+          <li><a href="#how-it-works" class="nav-link">How it works</a></li>
+          <li><a href="#reportable-issues" class="nav-link">Reportable issues</a></li>
+          <li><a href="/track.html" class="nav-link">Track</a></li>
+          <li><a href="/admin/login.html" class="nav-link admin-link">Admin portal</a></li>
+        </ul>
+      </nav>
+
+      <div class="mobile-nav-cta">
+        <a href="/track.html" class="btn btn-outline btn-sm btn-track-mob">Track</a>
+        <a href="#report" class="btn btn-primary btn-sm">Report an issue</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="hero-badge-dot"></span> Chandwad Civic Engagement Initiative
+        </div>
+        <h1 class="hero-title">
+          Better roads begin with <span>being heard.</span>
+        </h1>
+        <p class="hero-description">
+          A citizen-led infrastructure reporting platform for Chandwad town and the SNJB KBJ College of Engineering campus community. Pinpoint civic hazards, log reports, and track resolutions transparently.
+        </p>
+        <div class="hero-actions">
+          <a href="#report" class="btn btn-accent btn-lg">Report an issue</a>
+          <a href="/track.html" class="btn btn-outline btn-lg">Track a complaint</a>
+        </div>
+      </div>
+
+      <!-- CSS/SVG Map Illustration with Pin Accent -->
+      <div class="hero-visual">
+        <div class="map-card">
+          <svg class="map-svg" viewBox="0 0 400 280" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustrated map of Chandwad community reporting zone">
+            <!-- Background Map Grid -->
+            <rect width="400" height="280" fill="#E6EFEA" rx="16"/>
+            <!-- Roads / Infrastructure lines -->
+            <path d="M0 70 Q 150 90, 240 60 T 400 90" stroke="#CCDCD4" stroke-width="14" stroke-linecap="round"/>
+            <path d="M60 0 L 140 280" stroke="#CCDCD4" stroke-width="12" stroke-linecap="round"/>
+            <path d="M220 280 Q 250 160, 400 130" stroke="#CCDCD4" stroke-width="10" stroke-linecap="round"/>
+            <path d="M110 130 L 360 210" stroke="#DCEAE3" stroke-width="8" stroke-linecap="round"/>
+            <!-- SNJB Campus Zone -->
+            <rect x="30" y="140" width="90" height="70" rx="8" fill="#D3E5DE" stroke="#B8D4CA" stroke-width="2"/>
+            <text x="40" y="175" fill="#176B5D" font-size="10" font-weight="bold" font-family="sans-serif">SNJB KBJ CoE</text>
+            <text x="40" y="190" fill="#6B8E85" font-size="8" font-family="sans-serif">Campus Zone</text>
+            <!-- Bus Depot Area -->
+            <circle cx="280" cy="180" r="30" fill="#DCEAE3" stroke="#B8D4CA" stroke-width="2"/>
+            <text x="256" y="184" fill="#142B3A" font-size="9" font-weight="600" font-family="sans-serif">Bus Depot</text>
+            <!-- Highway Bypass Curve -->
+            <path d="M-10 20 C 120 40, 260 20, 410 40" stroke="#B6D1C6" stroke-width="6" stroke-dasharray="8 6"/>
+            <!-- Animated Coral Pin on Pothole location -->
+            <g class="pin-marker" transform="translate(195, 115)">
+              <ellipse cx="0" cy="5" rx="12" ry="4" fill="rgba(20, 43, 58, 0.25)"/>
+              <path d="M0 -34 C-9.5 -34 -17 -26.5 -17 -17 C-17 -4 0 4 0 4 C0 4 17 -4 17 -17 C17 -26.5 9.5 -34 0 -34 Z" fill="#E05A47"/>
+              <circle cx="0" cy="-17" r="6" fill="#FFFFFF"/>
+            </g>
+          </svg>
+
+          <div class="map-card-floating">
+            <div>
+              <div class="map-card-floating-text">Chandwad Reporting Region</div>
+              <div class="map-card-floating-sub">SNJB Campus &amp; Municipal Area</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works (6 Steps) -->
+  <section id="how-it-works" class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Simple Process</span>
+        <h2 class="section-title">How it works</h2>
+        <p class="section-subtitle">
+          Reporting an infrastructure hazard takes under two minutes. Follow these simple steps to notify the team.
+        </p>
+      </div>
+
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <h3 class="step-title">Identify problem</h3>
+          <p class="step-desc">Spot a damaged road, broken light, blocked drain, or safety hazard in your neighborhood or campus.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <h3 class="step-title">Open site</h3>
+          <p class="step-desc">Visit the Lokrun platform on any smartphone, tablet, or laptop without needing to install an app.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <h3 class="step-title">Select issue type</h3>
+          <p class="step-desc">Choose from 6 clear civic categories so the report is routed directly to the right municipal crew.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">4</div>
+          <h3 class="step-title">Enter details &amp; location</h3>
+          <p class="step-desc">Describe the issue and landmark, or tap "Detect my location" to tag exact GPS coordinates.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">5</div>
+          <h3 class="step-title">Attach photo</h3>
+          <p class="step-desc">Optionally upload a clear image (up to 5 MB) to help technicians assess equipment and repairs needed.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">6</div>
+          <h3 class="step-title">Submit &amp; get ID</h3>
+          <p class="step-desc">Receive an instant tracking reference code to monitor verification and resolution status.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What You Can Report (6 Categories) -->
+  <section id="reportable-issues" class="section section-sage">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Scope of Service</span>
+        <h2 class="section-title">What you can report</h2>
+        <p class="section-subtitle">
+          We categorize common civic infrastructure challenges across Chandwad and SNJB campus routes.
+        </p>
+      </div>
+
+      <div class="categories-grid">
+        <div class="category-card">
+          <div class="category-icon">🚧</div>
+          <h3 class="category-title">Potholes / damaged roads</h3>
+          <p class="category-desc">Asphalt depressions, craters, missing pavers, road shoulder erosion, or sunken utility trenches.</p>
+          <div class="category-examples">Coverage: Craters, fissures, shoulder collapse</div>
+        </div>
+
+        <div class="category-card">
+          <div class="category-icon">🌊</div>
+          <h3 class="category-title">Open or blocked drains</h3>
+          <p class="category-desc">Clogged stormwater channels, missing drain covers, silt accumulation, or foul sewage blockages.</p>
+          <div class="category-examples">Coverage: Culverts, missing slabs, silt blockages</div>
+        </div>
+
+        <div class="category-card">
+          <div class="category-icon">🌧️</div>
+          <h3 class="category-title">Waterlogging</h3>
+          <p class="category-desc">Standing rainwater flooding carriageways, burst drinking pipes, or lack of roadside drainage gradient.</p>
+          <div class="category-examples">Coverage: Roadway ponding, pipeline bursts</div>
+        </div>
+
+        <div class="category-card">
+          <div class="category-icon">💡</div>
+          <h3 class="category-title">Broken streetlights</h3>
+          <p class="category-desc">Unlit solar poles, flickering lamps, exposed junction box wires, or physical pole damage.</p>
+          <div class="category-examples">Coverage: Dark corridors, exposed junction boxes</div>
+        </div>
+
+        <div class="category-card">
+          <div class="category-icon">🚦</div>
+          <h3 class="category-title">Traffic-signal problems</h3>
+          <p class="category-desc">Blacked-out blinkers, damaged signal housings, broken timing cycles, or bent traffic signage.</p>
+          <div class="category-examples">Coverage: Inactive warning blinkers, damaged poles</div>
+        </div>
+
+        <div class="category-card">
+          <div class="category-icon">⚠️</div>
+          <h3 class="category-title">Construction hazards / other</h3>
+          <p class="category-desc">Unbarricaded excavation pits, dumped building debris, protruding rebar, or unlit roadside gravel heaps.</p>
+          <div class="category-examples">Coverage: Unfenced pits, unbarricaded roadworks</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Report Form Section (Navy Background #142B3A) -->
+  <section id="report" class="section section-dark">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Citizen Portal</span>
+        <h2 class="section-title">Submit a civic report</h2>
+        <p class="section-subtitle">
+          Provide issue details and location. All fields are verified locally.
+        </p>
+      </div>
+
+      <!-- Main Submission Form Card -->
+      <div id="report-form-card" class="form-card">
+        <div id="form-alert" class="form-alert form-alert-danger" role="alert"></div>
+
+        <form id="report-form" novalidate>
+          <!-- 1. Category Selection -->
+          <div class="form-group">
+            <label class="form-label">
+              1. Issue Type <span class="required-mark">*</span>
+            </label>
+            <div class="category-selector">
+              <label class="cat-option">
+                <input type="radio" name="category" value="Potholes / damaged roads" required>
+                <div class="cat-option-card">
+                  <span>🚧</span> Potholes / damaged roads
+                </div>
+              </label>
+
+              <label class="cat-option">
+                <input type="radio" name="category" value="Open or blocked drains">
+                <div class="cat-option-card">
+                  <span>🌊</span> Open or blocked drains
+                </div>
+              </label>
+
+              <label class="cat-option">
+                <input type="radio" name="category" value="Waterlogging">
+                <div class="cat-option-card">
+                  <span>🌧️</span> Waterlogging
+                </div>
+              </label>
+
+              <label class="cat-option">
+                <input type="radio" name="category" value="Broken streetlights">
+                <div class="cat-option-card">
+                  <span>💡</span> Broken streetlights
+                </div>
+              </label>
+
+              <label class="cat-option">
+                <input type="radio" name="category" value="Traffic-signal problems">
+                <div class="cat-option-card">
+                  <span>🚦</span> Traffic-signal problems
+                </div>
+              </label>
+
+              <label class="cat-option">
+                <input type="radio" name="category" value="Construction hazards / other">
+                <div class="cat-option-card">
+                  <span>⚠️</span> Construction hazards / other
+                </div>
+              </label>
+            </div>
+            <div id="error-category" class="inline-error"></div>
+          </div>
+
+          <!-- 2. Title -->
+          <div class="form-group">
+            <label for="report-title" class="form-label">
+              2. Title <span class="required-mark">*</span>
+            </label>
+            <input
+              type="text"
+              id="report-title"
+              class="form-control"
+              placeholder="e.g. Deep pothole opposite SNJB Gate 1"
+              maxlength="120"
+              required
+            >
+            <div class="form-hint">Brief headline summarizing the issue (3 to 120 characters).</div>
+            <div id="error-title" class="inline-error"></div>
+          </div>
+
+          <!-- 3. Description -->
+          <div class="form-group">
+            <label for="report-desc" class="form-label">
+              3. Description <span class="required-mark">*</span>
+            </label>
+            <textarea
+              id="report-desc"
+              class="form-control"
+              placeholder="Describe the severity, size, duration, and safety impact on commuters or pedestrians..."
+              maxlength="2000"
+              required
+            ></textarea>
+            <div class="form-hint">Detailed observations (5 to 2000 characters).</div>
+            <div id="error-desc" class="inline-error"></div>
+          </div>
+
+          <!-- 4. Location or Landmark & Geolocation -->
+          <div class="form-group">
+            <label for="report-landmark" class="form-label">
+              4. Location or Landmark <span class="required-mark">*</span>
+            </label>
+            <div class="location-row">
+              <input
+                type="text"
+                id="report-landmark"
+                class="form-control"
+                placeholder="e.g. Opposite SNJB College Gate 1, Chandwad"
+                maxlength="150"
+                required
+              >
+              <button type="button" id="btn-detect-location" class="btn-detect">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="3 11 22 2 13 21 11 13 3 11"></polygon>
+                </svg>
+                Detect my location
+              </button>
+            </div>
+            <div id="location-status" class="location-status"></div>
+            <div class="form-hint">Enter a recognizable landmark. GPS detection is optional.</div>
+            <div id="error-landmark" class="inline-error"></div>
+          </div>
+
+          <!-- 5. Image Attachment (Optional, max 5MB, JPG/PNG/WEBP) -->
+          <div class="form-group">
+            <label class="form-label">
+              5. Photo of Issue <span style="font-weight: normal; color: var(--color-text-inverse-muted);">(Optional)</span>
+            </label>
+            <div id="image-upload-zone" class="image-upload-zone">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#5EEAD4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin: 0 auto 0.5rem auto;">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                <polyline points="21 15 16 10 5 21"></polyline>
+              </svg>
+              <div style="font-weight: 600; font-size: 0.95rem; color: #FFFFFF;">Click or tap to attach photo</div>
+              <div style="font-size: 0.8rem; color: var(--color-text-inverse-muted); margin-top: 0.25rem;">
+                Supported: JPG, PNG, WEBP (Max 5 MB)
+              </div>
+              <input type="file" id="report-image" accept="image/jpeg,image/png,image/webp" style="display: none;">
+            </div>
+
+            <!-- Preview Card -->
+            <div id="image-preview-wrapper" class="image-preview-wrapper">
+              <img id="image-preview-img" class="image-preview-img" alt="Selected photo preview">
+              <button type="button" id="btn-remove-image" class="btn-remove-image" title="Remove image">&times;</button>
+            </div>
+            <div id="image-file-name" style="font-size: 0.8rem; color: #5EEAD4; margin-top: 0.4rem;"></div>
+            <div id="error-image" class="inline-error"></div>
+          </div>
+
+          <!-- 6. Optional Contact Details -->
+          <div class="form-group">
+            <label class="form-label">
+              6. Your Contact Details <span style="font-weight: normal; color: var(--color-text-inverse-muted);">(Optional for updates)</span>
+            </label>
+            <div class="form-row form-row-2">
+              <div>
+                <input type="text" id="contact-name" class="form-control" placeholder="Your name (optional)" maxlength="80">
+              </div>
+              <div>
+                <input type="tel" id="contact-phone" class="form-control" placeholder="Phone number (optional)" maxlength="25">
+              </div>
+            </div>
+            <div class="mt-1">
+              <input type="email" id="contact-email" class="form-control" placeholder="Email address (optional)" maxlength="120">
+              <div id="error-contact-email" class="inline-error"></div>
+            </div>
+          </div>
+
+          <!-- 7. Privacy Consent Checkbox -->
+          <div class="form-group">
+            <label class="checkbox-label">
+              <input type="checkbox" id="consent-checkbox" required>
+              <span>
+                I agree that this report description, issue category, and general landmark may be publicly tracked by reference ID. Personal contact information remains confidential. <span class="required-mark">*</span>
+              </span>
+            </label>
+            <div id="error-consent" class="inline-error"></div>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="mt-3">
+            <button type="submit" id="submit-btn" class="btn btn-accent btn-lg btn-block">
+              Submit Civic Report
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Success Card (Hidden until report submitted) -->
+      <div id="report-success-card" class="success-card">
+        <div class="success-icon-wrap">✓</div>
+        <h3 class="success-title">Report Submitted Successfully!</h3>
+        <p style="color: var(--color-text-muted); font-size: 0.95rem;">
+          Your report has been received and registered into the Lokrun civic database. Please retain your reference number below to track progress.
+        </p>
+
+        <div class="success-ref-box">
+          <div>
+            <div style="font-size: 0.8rem; text-transform: uppercase; color: var(--color-primary); font-weight: 700;">Reference ID</div>
+            <div id="success-ref-id" class="success-id">—</div>
+          </div>
+          <button type="button" id="btn-copy-id" class="btn btn-outline btn-sm">
+            Copy ID
+          </button>
+        </div>
+        <div id="copy-feedback" style="font-size: 0.85rem; color: #059669; font-weight: 600; min-height: 1.25rem;"></div>
+
+        <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1.5rem;">
+          <a id="link-track-report" href="/track.html" class="btn btn-primary btn-lg">
+            Track this report now
+          </a>
+          <button type="button" id="btn-new-report" class="btn btn-outline">
+            Submit another report
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Privacy Notice -->
+  <aside class="privacy-notice" aria-label="Privacy information">
+    <div class="container">
+      <div style="display: flex; align-items: flex-start; gap: 0.75rem;">
+        <span style="font-size: 1.25rem;">🔒</span>
+        <div>
+          <strong style="color: #FFFFFF;">Privacy Notice &amp; Data Ethics:</strong>
+          Lokrun processes civic infrastructure observations for community research and academic study at SNJB KBJ College of Engineering. Contact names, phone numbers, and emails are strictly withheld from public tracking endpoints. Only issue status, category, landmark, and engineering timeline notes are publicly queryable.
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div>
+        <div class="brand" style="color: #FFFFFF; font-size: 1.15rem; margin-bottom: 0.25rem;">
+          Lokrun<span>.</span>
+        </div>
+        <div class="footer-meta">
+          Second-year AI &amp; Data Science Community Engagement Project &bull; SNJB's KBJ College of Engineering, Chandwad
+        </div>
+      </div>
+      <div>
+        <div class="footer-prototype-disclaimer">
+          Local prototype – not connected to any government department. Prototype for a college project. Please do not submit sensitive personal information.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/report.js"></script>
+</body>
+</html>

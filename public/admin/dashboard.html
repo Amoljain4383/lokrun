@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard – Lokrun</title>
+  <link rel="stylesheet" href="/css/shared.css">
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+
+  <div class="admin-layout">
+    <!-- Mobile Sidebar Backdrop -->
+    <div id="sidebar-backdrop" class="sidebar-backdrop"></div>
+
+    <!-- Dark Navy Sidebar -->
+    <aside id="admin-sidebar" class="admin-sidebar">
+      <div class="sidebar-brand">
+        <svg style="width: 26px; height: 26px;" viewBox="0 0 24 24" fill="none">
+          <path d="M12 2C8.13 2 5 5.13 5 9C5 14.25 12 22 12 22C12 22 19 14.25 19 9C19 5.13 15.87 2 12 2ZM12 11.5C10.62 11.5 9.5 10.38 9.5 9C9.5 7.62 10.62 6.5 12 6.5C13.38 6.5 14.5 7.62 14.5 9C14.5 10.38 13.38 11.5 12 11.5Z" fill="#E05A47"/>
+        </svg>
+        <span>Lokrun Admin</span>
+      </div>
+
+      <nav class="sidebar-nav" aria-label="Admin Navigation">
+        <a href="/admin/dashboard.html" id="nav-dashboard" class="sidebar-link">
+          <span class="sidebar-link-icon">📊</span> Dashboard
+        </a>
+        <a href="/admin/reports.html" id="nav-reports" class="sidebar-link">
+          <span class="sidebar-link-icon">📋</span> Reports
+        </a>
+        <a href="/admin/profile.html" id="nav-profile" class="sidebar-link">
+          <span class="sidebar-link-icon">👤</span> Admin Profile
+        </a>
+        <a href="/admin/status.html" id="nav-status" class="sidebar-link">
+          <span class="sidebar-link-icon">⚙️</span> Server &amp; Storage
+        </a>
+
+        <div class="sidebar-divider"></div>
+
+        <a href="/" class="sidebar-link">
+          <span class="sidebar-link-icon">←</span> Citizen Website
+        </a>
+      </nav>
+
+      <!-- Bottom User Chip -->
+      <div class="sidebar-user">
+        <div id="user-chip-avatar" class="user-avatar">A</div>
+        <div class="user-info">
+          <div id="user-chip-name" class="user-name">Loading...</div>
+          <div id="user-chip-role" class="user-role-badge">Administrator</div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="admin-main">
+      <header class="admin-topbar">
+        <div class="topbar-left">
+          <button type="button" id="btn-sidebar-toggle" class="btn-sidebar-toggle" aria-label="Toggle Navigation">
+            ☰
+          </button>
+          <h1 class="topbar-title">Civic Overview Dashboard</h1>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <button type="button" id="btn-refresh" class="btn btn-outline btn-sm">
+            ↻ Refresh
+          </button>
+          <button type="button" id="btn-sign-out" class="btn btn-outline btn-sm">
+            Sign out
+          </button>
+        </div>
+      </header>
+
+      <div class="admin-body">
+        <!-- 4 Core Stat Cards -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-header">
+              <span class="stat-label">Total Reports</span>
+              <span class="stat-icon">📑</span>
+            </div>
+            <div id="stat-total" class="stat-value">0</div>
+            <div class="stat-sub">Logged in local database</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-header">
+              <span class="stat-label">Submitted</span>
+              <span class="stat-icon">📥</span>
+            </div>
+            <div id="stat-submitted" class="stat-value" style="color: var(--color-primary);">0</div>
+            <div class="stat-sub">Awaiting field assessment</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-header">
+              <span class="stat-label">In Progress</span>
+              <span class="stat-icon">🔧</span>
+            </div>
+            <div id="stat-progress" class="stat-value" style="color: #0369A1;">0</div>
+            <div class="stat-sub">Crew dispatched / repairing</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-header">
+              <span class="stat-label">Resolved</span>
+              <span class="stat-icon">✅</span>
+            </div>
+            <div id="stat-resolved" class="stat-value" style="color: #059669;">0</div>
+            <div class="stat-sub">Verified &amp; completed</div>
+          </div>
+        </div>
+
+        <!-- Pure CSS/SVG Analytics Charts -->
+        <div class="charts-grid">
+          <!-- By Category Chart -->
+          <div class="chart-card">
+            <div class="chart-title">
+              <span>Issues by Category</span>
+              <span style="font-size: 0.8rem; font-weight: normal; color: var(--color-text-muted);">Real-time count</span>
+            </div>
+            <div id="chart-categories-container">
+              <!-- Dynamically populated or empty state -->
+            </div>
+          </div>
+
+          <!-- By Priority Chart -->
+          <div class="chart-card">
+            <div class="chart-title">
+              <span>Issues by Priority</span>
+              <span style="font-size: 0.8rem; font-weight: normal; color: var(--color-text-muted);">Severity allocation</span>
+            </div>
+            <div id="chart-priorities-container">
+              <!-- Dynamically populated or empty state -->
+            </div>
+          </div>
+
+          <!-- By Status Chart -->
+          <div class="chart-card">
+            <div class="chart-title">
+              <span>Status Pipeline</span>
+              <span style="font-size: 0.8rem; font-weight: normal; color: var(--color-text-muted);">Lifecycle progress</span>
+            </div>
+            <div id="chart-statuses-container">
+              <!-- Dynamically populated or empty state -->
+            </div>
+          </div>
+
+          <!-- Top Landmarks Breakdown -->
+          <div class="chart-card">
+            <div class="chart-title">
+              <span>Frequent Hazard Locations</span>
+              <span style="font-size: 0.8rem; font-weight: normal; color: var(--color-text-muted);">Aggregated landmarks</span>
+            </div>
+            <div id="top-landmarks-container">
+              <!-- Dynamically populated or empty state -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Reports Table -->
+        <div class="table-card">
+          <div class="table-header-bar">
+            <div>
+              <h2 style="font-size: 1.15rem; font-weight: 800; color: var(--color-navy); margin-bottom: 0.2rem;">
+                Recent Civic Reports
+              </h2>
+              <div style="font-size: 0.8rem; color: var(--color-text-muted);">
+                Latest citizen submissions received across Chandwad and campus zones.
+              </div>
+            </div>
+            <a href="/admin/reports.html" class="btn btn-outline btn-sm">
+              View All Reports &rarr;
+            </a>
+          </div>
+
+          <div class="table-responsive">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Reference ID</th>
+                  <th>Title &amp; Landmark</th>
+                  <th>Category</th>
+                  <th>Priority</th>
+                  <th>Status</th>
+                  <th>Date</th>
+                </tr>
+              </thead>
+              <tbody id="recent-reports-tbody">
+                <!-- Dynamically populated or empty state -->
+              </tbody>
+            </table>
+          </div>
+          <div id="recent-reports-empty" class="empty-state hidden">
+            <div class="empty-state-icon">📭</div>
+            <div class="empty-state-title">No reports yet</div>
+            <div class="empty-state-desc">
+              When citizens submit reports from the homepage, they will appear here in real time.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="site-footer">
+        <div class="container footer-content">
+          <div>
+            <div class="brand" style="color: #FFFFFF; font-size: 1rem;">
+              Lokrun Admin Portal
+            </div>
+            <div class="footer-meta">
+              SNJB's KBJ College of Engineering, Chandwad &bull; AI &amp; DS Project Prototype
+            </div>
+          </div>
+          <div class="footer-prototype-disclaimer">
+            Local prototype – not connected to any government department. Prototype for a college project. Please do not submit sensitive personal information.
+          </div>
+        </div>
+      </footer>
+    </main>
+  </div>
+
+  <script src="/js/admin-common.js"></script>
+  <script src="/js/admin-dashboard.js"></script>
+</body>
+</html>

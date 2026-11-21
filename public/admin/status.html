@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Server &amp; Storage Telemetry – Lokrun Admin</title>
+  <link rel="stylesheet" href="/css/shared.css">
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+
+  <div class="admin-layout">
+    <div id="sidebar-backdrop" class="sidebar-backdrop"></div>
+
+    <!-- Dark Navy Sidebar -->
+    <aside id="admin-sidebar" class="admin-sidebar">
+      <div class="sidebar-brand">
+        <svg style="width: 26px; height: 26px;" viewBox="0 0 24 24" fill="none">
+          <path d="M12 2C8.13 2 5 5.13 5 9C5 14.25 12 22 12 22C12 22 19 14.25 19 9C19 5.13 15.87 2 12 2ZM12 11.5C10.62 11.5 9.5 10.38 9.5 9C9.5 7.62 10.62 6.5 12 6.5C13.38 6.5 14.5 7.62 14.5 9C14.5 10.38 13.38 11.5 12 11.5Z" fill="#E05A47"/>
+        </svg>
+        <span>Lokrun Admin</span>
+      </div>
+
+      <nav class="sidebar-nav" aria-label="Admin Navigation">
+        <a href="/admin/dashboard.html" id="nav-dashboard" class="sidebar-link">
+          <span class="sidebar-link-icon">📊</span> Dashboard
+        </a>
+        <a href="/admin/reports.html" id="nav-reports" class="sidebar-link">
+          <span class="sidebar-link-icon">📋</span> Reports
+        </a>
+        <a href="/admin/profile.html" id="nav-profile" class="sidebar-link">
+          <span class="sidebar-link-icon">👤</span> Admin Profile
+        </a>
+        <a href="/admin/status.html" id="nav-status" class="sidebar-link">
+          <span class="sidebar-link-icon">⚙️</span> Server &amp; Storage
+        </a>
+
+        <div class="sidebar-divider"></div>
+
+        <a href="/" class="sidebar-link">
+          <span class="sidebar-link-icon">←</span> Citizen Website
+        </a>
+      </nav>
+
+      <!-- Bottom User Chip -->
+      <div class="sidebar-user">
+        <div id="user-chip-avatar" class="user-avatar">A</div>
+        <div class="user-info">
+          <div id="user-chip-name" class="user-name">Loading...</div>
+          <div id="user-chip-role" class="user-role-badge">Administrator</div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="admin-main">
+      <header class="admin-topbar">
+        <div class="topbar-left">
+          <button type="button" id="btn-sidebar-toggle" class="btn-sidebar-toggle" aria-label="Toggle Navigation">
+            ☰
+          </button>
+          <h1 class="topbar-title">Server &amp; Storage Diagnostics</h1>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <button type="button" id="btn-refresh-status" class="btn btn-outline btn-sm">
+            ↻ Refresh
+          </button>
+          <button type="button" id="btn-sign-out" class="btn btn-outline btn-sm">
+            Sign out
+          </button>
+        </div>
+      </header>
+
+      <div class="admin-body">
+        <!-- Hosted / Cloud Ephemeral Notice -->
+        <div class="banner-box" style="background: rgba(234, 88, 12, 0.12); border: 1px solid rgba(234, 88, 12, 0.3); border-radius: var(--radius-md); padding: 1rem 1.25rem; margin-bottom: 1.5rem; color: #FDBA74; font-size: 0.875rem; line-height: 1.5;">
+          <strong>☁️ Hosted Storage Notice:</strong> Data on the hosted version is temporary. On free cloud hosting (such as Render's free tier), the server filesystem is ephemeral. All submitted citizen reports, audit logs, and uploaded photos in <code>data/</code> and <code>uploads/</code> reset whenever the free instance restarts or spins down from inactivity.
+        </div>
+
+        <!-- Telemetry Cards Grid -->
+        <div class="stats-grid" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));">
+          <!-- Card 1: Runtime -->
+          <div class="stat-card">
+            <div class="stat-header">
+              <span class="stat-label">Server Runtime</span>
+              <span class="stat-icon">⚡</span>
+            </div>
+            <div id="status-server" class="stat-value" style="font-size: 1.5rem; color: #059669;">
+              Online
+            </div>
+            <div id="status-uptime" class="stat-sub" style="font-weight: 600;">
+              Uptime: Calculating...
+            </div>
+            <div style="font-size: 0.775rem; color: var(--color-text-muted); margin-top: 0.5rem; line-height: 1.4;">
+              <div>Node: <span id="status-node-version">—</span></div>
+              <div>OS: <span id="status-platform">—</span></div>
+              <div>Memory (RSS): <span id="status-memory">—</span></div>
+            </div>
+          </div>
+
+          <!-- Card 2: Report Database -->
+          <div class="stat-card">
+            <div class="stat-header">
+              <span class="stat-label">Report Database</span>
+              <span class="stat-icon">💾</span>
+            </div>
+            <div id="status-db-records" class="stat-value" style="font-size: 1.85rem;">
+              0
+            </div>
+            <div class="stat-sub">
+              Live reports in <code>data/db.json</code>
+            </div>
+            <div style="font-size: 0.775rem; color: var(--color-text-muted); margin-top: 0.5rem; line-height: 1.4;">
+              <div>Storage Engine: Atomic JSON</div>
+              <div>Audit Entries: <span id="status-db-audits">0</span></div>
+              <div>Admin Accounts: <span id="status-db-admins">1</span></div>
+            </div>
+          </div>
+
+          <!-- Card 3: Uploads Folder -->
+          <div class="stat-card">
+            <div class="stat-header">
+              <span class="stat-label">Uploads Folder</span>
+              <span class="stat-icon">📁</span>
+            </div>
+            <div id="status-uploads-count" class="stat-value" style="font-size: 1.85rem;">
+              0
+            </div>
+            <div class="stat-sub">
+              Citizen photos stored in <code>uploads/</code>
+            </div>
+            <div style="font-size: 0.775rem; color: var(--color-text-muted); margin-top: 0.5rem; line-height: 1.4;">
+              <div>Disk Usage: <span id="status-uploads-size">0.00 MB</span></div>
+              <div>Format Support: JPG, PNG, WEBP</div>
+              <div>Max Per File: 5.00 MB</div>
+            </div>
+          </div>
+
+          <!-- Card 4: Email Notifications -->
+          <div class="stat-card">
+            <div class="stat-header">
+              <span class="stat-label">Email Gateway</span>
+              <span class="stat-icon">✉️</span>
+            </div>
+            <div class="stat-value" style="font-size: 1.5rem; color: var(--color-text-muted);">
+              Not Connected
+            </div>
+            <div class="stat-sub">
+              Local prototype mode
+            </div>
+            <div style="font-size: 0.775rem; color: var(--color-text-muted); margin-top: 0.5rem; line-height: 1.4;">
+              <div>SMTP Dispatcher: Disabled</div>
+              <div>Citizen SMS: Disabled</div>
+              <div>Scope: Chandwad academic project</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Before Public Deployment Warning Card -->
+        <div class="warning-box">
+          <div class="warning-title">
+            <span>⚠️</span> Before Public Deployment Requirements
+          </div>
+          <p style="font-size: 0.9rem; margin-bottom: 0.75rem; line-height: 1.5;">
+            This project is an educational, local prototype for SNJB's KBJ College of Engineering. <strong>None of the following production safeguards are currently implemented:</strong>
+          </p>
+          <ul class="warning-list">
+            <li><strong>Production Database:</strong> Replace atomic local JSON file with PostgreSQL / MySQL for concurrent write transactions and indexing.</li>
+            <li><strong>HTTPS &amp; TLS:</strong> Secure all HTTP traffic with SSL certificates to encrypt sensitive citizen and administrative cookies in transit.</li>
+            <li><strong>Rate Limiting &amp; DDoS Defense:</strong> Add request rate-limiting on submission and authentication endpoints to mitigate brute-force attacks.</li>
+            <li><strong>CSRF Protection:</strong> Enforce synchronized anti-CSRF tokens for state-changing endpoints (PATCH and POST).</li>
+            <li><strong>Role-Based Access Control (RBAC):</strong> Segment administrative responsibilities (e.g. Field Engineer, Ward Supervisor, System Administrator).</li>
+            <li><strong>Administrative Approval Workflows:</strong> Manually verify government identities before activating newly registered admin accounts.</li>
+            <li><strong>Automated Backups:</strong> Scheduled off-site incremental snapshots of databases and uploaded attachments.</li>
+          </ul>
+        </div>
+      </div>
+
+      <footer class="site-footer">
+        <div class="container footer-content">
+          <div>
+            <div class="brand" style="color: #FFFFFF; font-size: 1rem;">
+              Lokrun Admin Portal
+            </div>
+            <div class="footer-meta">
+              SNJB's KBJ College of Engineering, Chandwad &bull; AI &amp; DS Project Prototype
+            </div>
+          </div>
+          <div class="footer-prototype-disclaimer">
+            Local prototype – not connected to any government department. Prototype for a college project. Please do not submit sensitive personal information.
+          </div>
+        </div>
+      </footer>
+    </main>
+  </div>
+
+  <script src="/js/admin-common.js"></script>
+  <script src="/js/admin-status.js"></script>
+</body>
+</html>

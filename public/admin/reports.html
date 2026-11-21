@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Reports – Lokrun Admin</title>
+  <link rel="stylesheet" href="/css/shared.css">
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+
+  <div class="admin-layout">
+    <!-- Mobile Sidebar Backdrop -->
+    <div id="sidebar-backdrop" class="sidebar-backdrop"></div>
+
+    <!-- Dark Navy Sidebar -->
+    <aside id="admin-sidebar" class="admin-sidebar">
+      <div class="sidebar-brand">
+        <svg style="width: 26px; height: 26px;" viewBox="0 0 24 24" fill="none">
+          <path d="M12 2C8.13 2 5 5.13 5 9C5 14.25 12 22 12 22C12 22 19 14.25 19 9C19 5.13 15.87 2 12 2ZM12 11.5C10.62 11.5 9.5 10.38 9.5 9C9.5 7.62 10.62 6.5 12 6.5C13.38 6.5 14.5 7.62 14.5 9C14.5 10.38 13.38 11.5 12 11.5Z" fill="#E05A47"/>
+        </svg>
+        <span>Lokrun Admin</span>
+      </div>
+
+      <nav class="sidebar-nav" aria-label="Admin Navigation">
+        <a href="/admin/dashboard.html" id="nav-dashboard" class="sidebar-link">
+          <span class="sidebar-link-icon">📊</span> Dashboard
+        </a>
+        <a href="/admin/reports.html" id="nav-reports" class="sidebar-link">
+          <span class="sidebar-link-icon">📋</span> Reports
+        </a>
+        <a href="/admin/profile.html" id="nav-profile" class="sidebar-link">
+          <span class="sidebar-link-icon">👤</span> Admin Profile
+        </a>
+        <a href="/admin/status.html" id="nav-status" class="sidebar-link">
+          <span class="sidebar-link-icon">⚙️</span> Server &amp; Storage
+        </a>
+
+        <div class="sidebar-divider"></div>
+
+        <a href="/" class="sidebar-link">
+          <span class="sidebar-link-icon">←</span> Citizen Website
+        </a>
+      </nav>
+
+      <!-- Bottom User Chip -->
+      <div class="sidebar-user">
+        <div id="user-chip-avatar" class="user-avatar">A</div>
+        <div class="user-info">
+          <div id="user-chip-name" class="user-name">Loading...</div>
+          <div id="user-chip-role" class="user-role-badge">Administrator</div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="admin-main">
+      <header class="admin-topbar">
+        <div class="topbar-left">
+          <button type="button" id="btn-sidebar-toggle" class="btn-sidebar-toggle" aria-label="Toggle Navigation">
+            ☰
+          </button>
+          <h1 class="topbar-title">Civic Reports Management</h1>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <a href="/api/admin/export.csv" id="btn-export-csv" class="btn btn-outline btn-sm" download="lokrun-reports.csv">
+            📥 Export CSV
+          </a>
+          <button type="button" id="btn-refresh-reports" class="btn btn-outline btn-sm">
+            ↻ Refresh
+          </button>
+          <button type="button" id="btn-sign-out" class="btn btn-outline btn-sm">
+            Sign out
+          </button>
+        </div>
+      </header>
+
+      <div class="admin-body">
+        <!-- Search & Filter Controls -->
+        <div class="filter-bar">
+          <input
+            type="text"
+            id="filter-search"
+            class="filter-input"
+            style="flex: 1; min-width: 220px;"
+            placeholder="Search by ID, title, landmark, reporter name, phone, or email..."
+          >
+
+          <select id="filter-status" class="filter-input">
+            <option value="">All Statuses</option>
+            <option value="Submitted">Submitted</option>
+            <option value="Under Review">Under Review</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Waiting for Citizen">Waiting for Citizen</option>
+            <option value="Resolved">Resolved</option>
+            <option value="Completed">Completed</option>
+            <option value="Closed">Closed</option>
+          </select>
+
+          <select id="filter-category" class="filter-input">
+            <option value="">All Categories</option>
+            <option value="Potholes / damaged roads">Potholes / damaged roads</option>
+            <option value="Open or blocked drains">Open or blocked drains</option>
+            <option value="Waterlogging">Waterlogging</option>
+            <option value="Broken streetlights">Broken streetlights</option>
+            <option value="Traffic-signal problems">Traffic-signal problems</option>
+            <option value="Construction hazards / other">Construction hazards / other</option>
+          </select>
+
+          <select id="filter-sort" class="filter-input">
+            <option value="newest">Sort: Newest First</option>
+            <option value="oldest">Sort: Oldest First</option>
+            <option value="priority">Sort: By Priority</option>
+          </select>
+        </div>
+
+        <!-- Reports Table -->
+        <div class="table-card">
+          <div class="table-header-bar">
+            <div>
+              <span id="reports-count-label" style="font-weight: 700; color: var(--color-navy);">
+                Showing 0 reports
+              </span>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Title &amp; Landmark</th>
+                  <th>Category</th>
+                  <th>Priority</th>
+                  <th>Status</th>
+                  <th>Reporter</th>
+                  <th>Date</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="reports-tbody">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Empty State -->
+          <div id="reports-empty-state" class="empty-state hidden">
+            <div class="empty-state-icon">📋</div>
+            <div class="empty-state-title">No reports found</div>
+            <div id="reports-empty-desc" class="empty-state-desc">
+              No civic reports currently match your search or filter selection.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Report Detail Modal -->
+      <div id="report-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-report-id">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div>
+              <div style="font-size: 0.8rem; text-transform: uppercase; font-weight: 700; color: var(--color-primary);">
+                Civic Report Details
+              </div>
+              <h2 id="modal-report-id" class="modal-title" style="font-family: var(--font-mono);"></h2>
+            </div>
+            <button type="button" id="btn-close-modal" class="btn-outline btn-sm" style="border-radius: 50%; width: 32px; height: 32px; padding: 0;" aria-label="Close modal">
+              &times;
+            </button>
+          </div>
+
+          <div class="modal-body">
+            <div id="modal-alert" class="form-alert form-alert-danger" role="alert"></div>
+
+            <!-- Title & Category -->
+            <div class="detail-section">
+              <div class="detail-section-title">Title</div>
+              <div id="modal-title" style="font-size: 1.15rem; font-weight: 700; color: var(--color-navy);"></div>
+              <div style="margin-top: 0.35rem;">
+                <span id="modal-category" class="badge" style="background: var(--color-bg-sage); color: var(--color-navy);"></span>
+              </div>
+            </div>
+
+            <!-- Description -->
+            <div class="detail-section">
+              <div class="detail-section-title">Description</div>
+              <div id="modal-description" style="font-size: 0.925rem; color: var(--color-text-main); line-height: 1.6; white-space: pre-wrap;"></div>
+            </div>
+
+            <!-- Landmark & Coordinates -->
+            <div class="detail-section">
+              <div class="detail-section-title">Location &amp; Coordinates</div>
+              <div id="modal-landmark" style="font-size: 0.95rem; font-weight: 600; color: var(--color-navy); margin-bottom: 0.35rem;"></div>
+              <div id="modal-coordinates-wrap" style="font-size: 0.875rem;">
+                <!-- Dynamically populated: Maps link or "Coordinates not provided" -->
+              </div>
+            </div>
+
+            <!-- Photo Attachment -->
+            <div class="detail-section">
+              <div class="detail-section-title">Attached Photo</div>
+              <div id="modal-image-wrap">
+                <!-- Dynamically populated: image or "No photo uploaded" -->
+              </div>
+            </div>
+
+            <!-- Reporter Details -->
+            <div class="detail-section">
+              <div class="detail-section-title">Citizen Contact Information</div>
+              <div style="background: var(--color-bg-subtle); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 0.85rem 1rem; font-size: 0.875rem;">
+                <div><strong>Name:</strong> <span id="modal-reporter-name"></span></div>
+                <div style="margin-top: 0.25rem;"><strong>Phone:</strong> <span id="modal-reporter-phone"></span></div>
+                <div style="margin-top: 0.25rem;"><strong>Email:</strong> <span id="modal-reporter-email"></span></div>
+              </div>
+            </div>
+
+            <!-- Priority & Status Management Form -->
+            <div class="status-edit-card">
+              <div style="font-size: 0.95rem; font-weight: 800; color: var(--color-navy); margin-bottom: 0.75rem;">
+                Update Report Status &amp; Priority
+              </div>
+
+              <div class="form-row form-row-2">
+                <div class="form-group" style="margin-bottom: 0.75rem;">
+                  <label for="modal-select-priority" class="form-label" style="color: var(--color-navy);">
+                    Priority Level
+                  </label>
+                  <select id="modal-select-priority" class="filter-input" style="width: 100%;">
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
+                    <option value="Critical">Critical</option>
+                  </select>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 0.75rem;">
+                  <label for="modal-select-status" class="form-label" style="color: var(--color-navy);">
+                    Lifecycle Status
+                  </label>
+                  <select id="modal-select-status" class="filter-input" style="width: 100%;">
+                    <option value="Submitted">Submitted</option>
+                    <option value="Under Review">Under Review</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Waiting for Citizen">Waiting for Citizen</option>
+                    <option value="Resolved">Resolved</option>
+                    <option value="Completed">Completed</option>
+                    <option value="Closed">Closed</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group" style="margin-bottom: 0.75rem;">
+                <label for="modal-internal-note" class="form-label" style="color: var(--color-navy);">
+                  Engineering / Administrative Note (Logged to audit trail)
+                </label>
+                <input
+                  type="text"
+                  id="modal-internal-note"
+                  class="filter-input"
+                  style="width: 100%;"
+                  placeholder="e.g. Field inspection completed. Repair crew dispatched."
+                  maxlength="500"
+                >
+              </div>
+
+              <button type="button" id="btn-save-report" class="btn btn-primary btn-sm">
+                Save Changes &amp; Log Audit
+              </button>
+            </div>
+
+            <!-- Audit Trail -->
+            <div style="margin-top: 2rem;">
+              <div class="detail-section-title">Audit Trail History</div>
+              <div id="modal-audit-timeline" class="timeline"></div>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" id="btn-print-report" class="btn btn-outline btn-sm">
+              🖨️ Print Summary
+            </button>
+            <button type="button" id="btn-close-modal-footer" class="btn btn-outline btn-sm">
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <footer class="site-footer">
+        <div class="container footer-content">
+          <div>
+            <div class="brand" style="color: #FFFFFF; font-size: 1rem;">
+              Lokrun Admin Portal
+            </div>
+            <div class="footer-meta">
+              SNJB's KBJ College of Engineering, Chandwad &bull; AI &amp; DS Project Prototype
+            </div>
+          </div>
+          <div class="footer-prototype-disclaimer">
+            Local prototype – not connected to any government department. Prototype for a college project. Please do not submit sensitive personal information.
+          </div>
+        </div>
+      </footer>
+    </main>
+  </div>
+
+  <script src="/js/admin-common.js"></script>
+  <script src="/js/admin-reports.js"></script>
+</body>
+</html>
